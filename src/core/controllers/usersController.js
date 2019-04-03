@@ -1,5 +1,4 @@
 const HttpStatus = require('http-status');
-const { resolve } = require('path');
 
 const defaultResponse = (data, statusCode = HttpStatus.OK) => ({
     data,
@@ -62,19 +61,39 @@ class UsersController {
     deleteUser(userId) {
         return new Promise(async (resolve, reject) => {
             try {
-              const deletedUser = await this.db
-                .get('users')
-                .remove({ id: parseInt(userId) })
-                .write();
-              if (deletedUser.length) {
-                resolve(defaultResponse({ message: `user successfully deleted` }, 204));
-              } else {
-                resolve(defaultResponse({ message: `user with id: ${userId} Not Found` }, HttpStatus.NOT_FOUND));
-              }
+                const deletedUser = await this.db
+                    .get('users')
+                    .remove({ id: parseInt(userId) })
+                    .write();
+                if (deletedUser.length) {
+                    resolve(defaultResponse({ message: `user successfully deleted` }, 204));
+                } else {
+                    resolve(defaultResponse({ message: `user with id: ${userId} Not Found` }, HttpStatus.NOT_FOUND));
+                }
             } catch (error) {
-              reject(errorResponse(`Error to remove user: ${error.message}`));
+                reject(errorResponse(`Error to remove user: ${error.message}`));
             }
-          });
+        });
+    }
+
+    updateUser(user, userId) {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const userUpdated = await this.db
+                    .get('users')
+                    .find({ id: parseInt(userId) })
+                    .assign({ ...user, id: parseInt(userId) })
+                    .write();
+
+                if (userUpdated) {
+                    resolve(defaultResponse({ message: `User successfully updated` }));
+                } else {
+                    resolve(defaultResponse({ message: `user with id: ${userId} Not Found` }, HttpStatus.NOT_FOUND));
+                }
+            } catch (error) {
+                reject(errorResponse(`Error to update user: ${error.message}`));
+            }
+        });
     }
 }
 

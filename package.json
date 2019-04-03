@@ -4,12 +4,22 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "node src/index.js"
+    "start": "node src/index.js",
+    "testContract": "mocha --opts src/tests/contract/mocha.opts src/tests/contract/**/*.spec.js"
   },
   "dependencies": {
+    "chai": "^4.2.0",
     "cors": "^2.8.5",
     "express": "^4.16.4",
     "http-status": "^1.3.2",
-    "lowdb": "^1.0.0"
+    "joi-assert": "^0.0.3",
+    "lowdb": "^1.0.0",
+    "mocha": "^6.0.2",
+    "mocha-jenkins-reporter": "^0.4.1",
+    "mocha-simple-html-reporter": "^1.1.0",
+    "supertest": "^4.0.2"
+  },
+  "devDependencies": {
+    "@hapi/joi": "^15.0.0"
   }
 }
