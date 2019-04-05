@@ -1,0 +1,12 @@
+{
+    "reporterEnabled": "mocha-junit-reporter, xunit, mochawesome, mocha-jenkins-reporter",
+    "jsonReporterOptions": {
+        "output": "report.json"
+    },
+    "xunitReporterOptions": {
+        "output": "xunit.xml"
+    },
+    "mochaJunitReporterReporterOptions": {
+        "mochaFile": "junit.xml"
+    }
+}

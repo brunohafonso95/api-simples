@@ -7,7 +7,7 @@
 */
 
 const chai = require('chai'); // lib de assert
-const joi =  require('@hapi/joi'); // lib para montar os contratos
+const joi =  require('joi'); // lib para montar os contratos
 const joiAssert = require('joi-assert'); // lib para fazer assert nos contratos
 const supertest = require('supertest'); // lib que faz as requicições
 const app = require('../../app'); // importando o app (só é feito nesse exemplo porque eu contrui uma API para testes)
