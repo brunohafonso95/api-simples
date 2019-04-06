@@ -1,0 +1,1398 @@
+swagger: '2.0'
+info:
+  title: HolidayService2
+  description: Web service that calculates holiday dates. (Version 2.0.1)
+  x-ibm-name: holidayservice2
+  version: 1.0.0
+schemes:
+  - https
+basePath: /HolidayService2
+produces:
+  - application/xml
+consumes:
+  - text/xml
+securityDefinitions:
+  clientID:
+    type: apiKey
+    name: X-IBM-Client-Id
+    in: header
+    description: ''
+security:
+  - clientID: []
+x-ibm-configuration:
+  type: wsdl
+  phase: realized
+  enforced: true
+  testable: true
+  gateway: datapower-gateway
+  cors:
+    enabled: true
+  wsdl-definition:
+    wsdl: internal.wsdl
+    service: HolidayService2
+    port: HolidayService2Soap
+    soap-version: '1.1'
+  assembly:
+    execute:
+      - proxy:
+          title: proxy
+          target-url: 'http://holidaywebservice.com/HolidayService_v2/HolidayService2.asmx'
+  x-ibm-apiconnect-wsdl:
+    package-version: 1.6.43
+    options: {}
+    messages:
+      info:
+        - message: >-
+            The wsdl 'service' has multiple 'ports'. The api is generated using
+            information in the first soap 'port'.
+      warning: []
+      error: []
+paths:
+  /GetCountriesAvailable:
+    post:
+      summary: Operation GetCountriesAvailable
+      description: Get the available countries.
+      operationId: GetCountriesAvailable
+      x-ibm-soap:
+        soap-action: >-
+          http://www.holidaywebservice.com/HolidayService_v2/GetCountriesAvailable
+        soap-operation: >-
+          {http://www.holidaywebservice.com/HolidayService_v2/}GetCountriesAvailable
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetCountriesAvailableInput'
+      responses:
+        default:
+          description: ''
+          schema:
+            $ref: '#/definitions/GetCountriesAvailableOutput'
+  /GetHolidaysAvailable:
+    post:
+      summary: Operation GetHolidaysAvailable
+      description: Get the available holidays for a specified country.
+      operationId: GetHolidaysAvailable
+      x-ibm-soap:
+        soap-action: >-
+          http://www.holidaywebservice.com/HolidayService_v2/GetHolidaysAvailable
+        soap-operation: >-
+          {http://www.holidaywebservice.com/HolidayService_v2/}GetHolidaysAvailable
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetHolidaysAvailableInput'
+      responses:
+        default:
+          description: ''
+          schema:
+            $ref: '#/definitions/GetHolidaysAvailableOutput'
+  /GetHolidayDate:
+    post:
+      summary: Operation GetHolidayDate
+      description: Get the date of a specific holiday.
+      operationId: GetHolidayDate
+      x-ibm-soap:
+        soap-action: 'http://www.holidaywebservice.com/HolidayService_v2/GetHolidayDate'
+        soap-operation: '{http://www.holidaywebservice.com/HolidayService_v2/}GetHolidayDate'
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetHolidayDateInput'
+      responses:
+        default:
+          description: ''
+          schema:
+            $ref: '#/definitions/GetHolidayDateOutput'
+  /GetHolidaysForDateRange:
+    post:
+      summary: Operation GetHolidaysForDateRange
+      description: Get the holidays for a date range.
+      operationId: GetHolidaysForDateRange
+      x-ibm-soap:
+        soap-action: >-
+          http://www.holidaywebservice.com/HolidayService_v2/GetHolidaysForDateRange
+        soap-operation: >-
+          {http://www.holidaywebservice.com/HolidayService_v2/}GetHolidaysForDateRange
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetHolidaysForDateRangeInput'
+      responses:
+        default:
+          description: ''
+          schema:
+            $ref: '#/definitions/GetHolidaysForDateRangeOutput'
+  /GetHolidaysForYear:
+    post:
+      summary: Operation GetHolidaysForYear
+      description: Get the holidays for an entire year.
+      operationId: GetHolidaysForYear
+      x-ibm-soap:
+        soap-action: 'http://www.holidaywebservice.com/HolidayService_v2/GetHolidaysForYear'
+        soap-operation: >-
+          {http://www.holidaywebservice.com/HolidayService_v2/}GetHolidaysForYear
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetHolidaysForYearInput'
+      responses:
+        default:
+          description: ''
+          schema:
+            $ref: '#/definitions/GetHolidaysForYearOutput'
+  /GetHolidaysForMonth:
+    post:
+      summary: Operation GetHolidaysForMonth
+      description: Get the holidays for a specific month.
+      operationId: GetHolidaysForMonth
+      x-ibm-soap:
+        soap-action: 'http://www.holidaywebservice.com/HolidayService_v2/GetHolidaysForMonth'
+        soap-operation: >-
+          {http://www.holidaywebservice.com/HolidayService_v2/}GetHolidaysForMonth
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetHolidaysForMonthInput'
+      responses:
+        default:
+          description: ''
+          schema:
+            $ref: '#/definitions/GetHolidaysForMonthOutput'
+definitions:
+  Security:
+    xml:
+      namespace: >-
+        http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd
+      prefix: wsse
+    description: Header for WS-Security
+    type: object
+    properties:
+      UsernameToken:
+        xml:
+          namespace: >-
+            http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd
+          prefix: wsse
+        type: object
+        properties:
+          Username:
+            xml:
+              namespace: >-
+                http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd
+              prefix: wsse
+            type: string
+          Password:
+            xml:
+              namespace: >-
+                http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd
+              prefix: wsse
+            type: string
+          Nonce:
+            xml:
+              namespace: >-
+                http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd
+              prefix: wsse
+            type: string
+            properties:
+              EncodingType:
+                xml:
+                  namespace: ''
+                  attribute: true
+                type: string
+          Created:
+            xml:
+              namespace: >-
+                http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd
+              prefix: wsu
+            type: string
+      Timestamp:
+        xml:
+          namespace: >-
+            http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd
+          prefix: wsu
+        type: object
+        properties:
+          Created:
+            xml:
+              namespace: >-
+                http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd
+              prefix: wsu
+            type: string
+          Expires:
+            xml:
+              namespace: >-
+                http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd
+              prefix: wsu
+            type: string
+          Id:
+            xml:
+              namespace: >-
+                http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd
+              prefix: wsu
+              attribute: true
+            type: string
+  GetCountriesAvailableInput:
+    type: object
+    properties:
+      Envelope:
+        xml:
+          namespace: 'http://schemas.xmlsoap.org/soap/envelope/'
+          prefix: soapenv
+        type: object
+        properties:
+          Header:
+            $ref: '#/definitions/GetCountriesAvailableHeader'
+          Body:
+            xml:
+              namespace: 'http://schemas.xmlsoap.org/soap/envelope/'
+              prefix: soapenv
+            type: object
+            properties:
+              GetCountriesAvailable:
+                $ref: '#/definitions/GetCountriesAvailable_tns'
+            required:
+              - GetCountriesAvailable
+        required:
+          - Body
+    required:
+      - Envelope
+    x-ibm-schema:
+      wsdl-port: '{http://www.holidaywebservice.com/HolidayService_v2/}HolidayService2Soap'
+      wsd-operation: GetCountriesAvailable
+      wsdl-message-direction-or-name: GetCountriesAvailableRequest
+    example: >-
+
+      <soapenv:Envelope
+      xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+       <soapenv:Header>
+        <wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+         <wsse:UsernameToken>
+          <wsse:Username>string</wsse:Username>
+          <wsse:Password>string</wsse:Password>
+          <wsse:Nonce EncodingType="string">string</wsse:Nonce>
+          <wsu:Created>string</wsu:Created>
+         </wsse:UsernameToken>
+         <wsu:Timestamp wsu:Id="string">
+          <wsu:Created>string</wsu:Created>
+          <wsu:Expires>string</wsu:Expires>
+         </wsu:Timestamp>
+        </wsse:Security>
+       </soapenv:Header>
+       <soapenv:Body>
+        <tns:GetCountriesAvailable xmlns:tns="http://www.holidaywebservice.com/HolidayService_v2/"><!-- mandatory --></tns:GetCountriesAvailable>
+       </soapenv:Body>
+      </soapenv:Envelope>
+  GetCountriesAvailableHeader:
+    type: object
+    properties:
+      Security:
+        $ref: '#/definitions/Security'
+  GetCountriesAvailableOutput:
+    type: object
+    properties:
+      Envelope:
+        xml:
+          namespace: 'http://schemas.xmlsoap.org/soap/envelope/'
+          prefix: soapenv
+        type: object
+        properties:
+          Body:
+            xml:
+              namespace: 'http://schemas.xmlsoap.org/soap/envelope/'
+              prefix: soapenv
+            type: object
+            properties:
+              GetCountriesAvailableResponse:
+                $ref: '#/definitions/GetCountriesAvailableResponse_tns'
+        required:
+          - Body
+    required:
+      - Envelope
+    x-ibm-schema:
+      wsdl-port: '{http://www.holidaywebservice.com/HolidayService_v2/}HolidayService2Soap'
+      wsd-operation: GetCountriesAvailable
+      wsdl-message-direction-or-name: GetCountriesAvailableResponse
+    example: >-
+
+      <soapenv:Envelope
+      xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+       <soapenv:Body>
+        <tns:GetCountriesAvailableResponse xmlns:tns="http://www.holidaywebservice.com/HolidayService_v2/">
+         <tns:GetCountriesAvailableResult>
+          <tns:CountryCode><!-- between zero and unlimited repetitions of this element -->
+           <tns:Code>string</tns:Code>
+           <tns:Description>string</tns:Description>
+          </tns:CountryCode>
+         </tns:GetCountriesAvailableResult>
+        </tns:GetCountriesAvailableResponse>
+       </soapenv:Body>
+      </soapenv:Envelope>
+  GetHolidaysAvailableInput:
+    type: object
+    properties:
+      Envelope:
+        xml:
+          namespace: 'http://schemas.xmlsoap.org/soap/envelope/'
+          prefix: soapenv
+        type: object
+        properties:
+          Header:
+            $ref: '#/definitions/GetHolidaysAvailableHeader'
+          Body:
+            xml:
+              namespace: 'http://schemas.xmlsoap.org/soap/envelope/'
+              prefix: soapenv
+            type: object
+            properties:
+              GetHolidaysAvailable:
+                $ref: '#/definitions/GetHolidaysAvailable_tns'
+            required:
+              - GetHolidaysAvailable
+        required:
+          - Body
+    required:
+      - Envelope
+    x-ibm-schema:
+      wsdl-port: '{http://www.holidaywebservice.com/HolidayService_v2/}HolidayService2Soap'
+      wsd-operation: GetHolidaysAvailable
+      wsdl-message-direction-or-name: GetHolidaysAvailableRequest
+    example: >-
+
+      <soapenv:Envelope
+      xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+       <soapenv:Header>
+        <wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+         <wsse:UsernameToken>
+          <wsse:Username>string</wsse:Username>
+          <wsse:Password>string</wsse:Password>
+          <wsse:Nonce EncodingType="string">string</wsse:Nonce>
+          <wsu:Created>string</wsu:Created>
+         </wsse:UsernameToken>
+         <wsu:Timestamp wsu:Id="string">
+          <wsu:Created>string</wsu:Created>
+          <wsu:Expires>string</wsu:Expires>
+         </wsu:Timestamp>
+        </wsse:Security>
+       </soapenv:Header>
+       <soapenv:Body>
+        <tns:GetHolidaysAvailable xmlns:tns="http://www.holidaywebservice.com/HolidayService_v2/"><!-- mandatory -->
+         <tns:countryCode><!-- mandatory -->string</tns:countryCode>
+        </tns:GetHolidaysAvailable>
+       </soapenv:Body>
+      </soapenv:Envelope>
+  GetHolidaysAvailableHeader:
+    type: object
+    properties:
+      Security:
+        $ref: '#/definitions/Security'
+  GetHolidaysAvailableOutput:
+    type: object
+    properties:
+      Envelope:
+        xml:
+          namespace: 'http://schemas.xmlsoap.org/soap/envelope/'
+          prefix: soapenv
+        type: object
+        properties:
+          Body:
+            xml:
+              namespace: 'http://schemas.xmlsoap.org/soap/envelope/'
+              prefix: soapenv
+            type: object
+            properties:
+              GetHolidaysAvailableResponse:
+                $ref: '#/definitions/GetHolidaysAvailableResponse_tns'
+        required:
+          - Body
+    required:
+      - Envelope
+    x-ibm-schema:
+      wsdl-port: '{http://www.holidaywebservice.com/HolidayService_v2/}HolidayService2Soap'
+      wsd-operation: GetHolidaysAvailable
+      wsdl-message-direction-or-name: GetHolidaysAvailableResponse
+    example: >-
+
+      <soapenv:Envelope
+      xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+       <soapenv:Body>
+        <tns:GetHolidaysAvailableResponse xmlns:tns="http://www.holidaywebservice.com/HolidayService_v2/">
+         <tns:GetHolidaysAvailableResult>
+          <tns:HolidayCode><!-- between zero and unlimited repetitions of this element -->
+           <tns:Code>string</tns:Code>
+           <tns:Description>string</tns:Description>
+          </tns:HolidayCode>
+         </tns:GetHolidaysAvailableResult>
+        </tns:GetHolidaysAvailableResponse>
+       </soapenv:Body>
+      </soapenv:Envelope>
+  GetHolidayDateInput:
+    type: object
+    properties:
+      Envelope:
+        xml:
+          namespace: 'http://schemas.xmlsoap.org/soap/envelope/'
+          prefix: soapenv
+        type: object
+        properties:
+          Header:
+            $ref: '#/definitions/GetHolidayDateHeader'
+          Body:
+            xml:
+              namespace: 'http://schemas.xmlsoap.org/soap/envelope/'
+              prefix: soapenv
+            type: object
+            properties:
+              GetHolidayDate:
+                $ref: '#/definitions/GetHolidayDate_tns'
+            required:
+              - GetHolidayDate
+        required:
+          - Body
+    required:
+      - Envelope
+    x-ibm-schema:
+      wsdl-port: '{http://www.holidaywebservice.com/HolidayService_v2/}HolidayService2Soap'
+      wsd-operation: GetHolidayDate
+      wsdl-message-direction-or-name: GetHolidayDateRequest
+    example: >-
+
+      <soapenv:Envelope
+      xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+       <soapenv:Header>
+        <wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+         <wsse:UsernameToken>
+          <wsse:Username>string</wsse:Username>
+          <wsse:Password>string</wsse:Password>
+          <wsse:Nonce EncodingType="string">string</wsse:Nonce>
+          <wsu:Created>string</wsu:Created>
+         </wsse:UsernameToken>
+         <wsu:Timestamp wsu:Id="string">
+          <wsu:Created>string</wsu:Created>
+          <wsu:Expires>string</wsu:Expires>
+         </wsu:Timestamp>
+        </wsse:Security>
+       </soapenv:Header>
+       <soapenv:Body>
+        <tns:GetHolidayDate xmlns:tns="http://www.holidaywebservice.com/HolidayService_v2/"><!-- mandatory -->
+         <tns:countryCode><!-- mandatory -->string</tns:countryCode>
+         <tns:holidayCode>string</tns:holidayCode>
+         <tns:year><!-- mandatory -->3</tns:year>
+        </tns:GetHolidayDate>
+       </soapenv:Body>
+      </soapenv:Envelope>
+  GetHolidayDateHeader:
+    type: object
+    properties:
+      Security:
+        $ref: '#/definitions/Security'
+  GetHolidayDateOutput:
+    type: object
+    properties:
+      Envelope:
+        xml:
+          namespace: 'http://schemas.xmlsoap.org/soap/envelope/'
+          prefix: soapenv
+        type: object
+        properties:
+          Body:
+            xml:
+              namespace: 'http://schemas.xmlsoap.org/soap/envelope/'
+              prefix: soapenv
+            type: object
+            properties:
+              GetHolidayDateResponse:
+                $ref: '#/definitions/GetHolidayDateResponse_tns'
+        required:
+          - Body
+    required:
+      - Envelope
+    x-ibm-schema:
+      wsdl-port: '{http://www.holidaywebservice.com/HolidayService_v2/}HolidayService2Soap'
+      wsd-operation: GetHolidayDate
+      wsdl-message-direction-or-name: GetHolidayDateResponse
+    example: >-
+
+      <soapenv:Envelope
+      xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+       <soapenv:Body>
+        <tns:GetHolidayDateResponse xmlns:tns="http://www.holidaywebservice.com/HolidayService_v2/">
+         <tns:GetHolidayDateResult><!-- mandatory -->2016-04-18T14:07:37</tns:GetHolidayDateResult>
+        </tns:GetHolidayDateResponse>
+       </soapenv:Body>
+      </soapenv:Envelope>
+  GetHolidaysForDateRangeInput:
+    type: object
+    properties:
+      Envelope:
+        xml:
+          namespace: 'http://schemas.xmlsoap.org/soap/envelope/'
+          prefix: soapenv
+        type: object
+        properties:
+          Header:
+            $ref: '#/definitions/GetHolidaysForDateRangeHeader'
+          Body:
+            xml:
+              namespace: 'http://schemas.xmlsoap.org/soap/envelope/'
+              prefix: soapenv
+            type: object
+            properties:
+              GetHolidaysForDateRange:
+                $ref: '#/definitions/GetHolidaysForDateRange_tns'
+            required:
+              - GetHolidaysForDateRange
+        required:
+          - Body
+    required:
+      - Envelope
+    x-ibm-schema:
+      wsdl-port: '{http://www.holidaywebservice.com/HolidayService_v2/}HolidayService2Soap'
+      wsd-operation: GetHolidaysForDateRange
+      wsdl-message-direction-or-name: GetHolidaysForDateRangeRequest
+    example: >-
+
+      <soapenv:Envelope
+      xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+       <soapenv:Header>
+        <wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+         <wsse:UsernameToken>
+          <wsse:Username>string</wsse:Username>
+          <wsse:Password>string</wsse:Password>
+          <wsse:Nonce EncodingType="string">string</wsse:Nonce>
+          <wsu:Created>string</wsu:Created>
+         </wsse:UsernameToken>
+         <wsu:Timestamp wsu:Id="string">
+          <wsu:Created>string</wsu:Created>
+          <wsu:Expires>string</wsu:Expires>
+         </wsu:Timestamp>
+        </wsse:Security>
+       </soapenv:Header>
+       <soapenv:Body>
+        <tns:GetHolidaysForDateRange xmlns:tns="http://www.holidaywebservice.com/HolidayService_v2/"><!-- mandatory -->
+         <tns:countryCode><!-- mandatory -->string</tns:countryCode>
+         <tns:startDate><!-- mandatory -->2016-04-18T14:07:37</tns:startDate>
+         <tns:endDate><!-- mandatory -->2016-04-18T14:07:37</tns:endDate>
+        </tns:GetHolidaysForDateRange>
+       </soapenv:Body>
+      </soapenv:Envelope>
+  GetHolidaysForDateRangeHeader:
+    type: object
+    properties:
+      Security:
+        $ref: '#/definitions/Security'
+  GetHolidaysForDateRangeOutput:
+    type: object
+    properties:
+      Envelope:
+        xml:
+          namespace: 'http://schemas.xmlsoap.org/soap/envelope/'
+          prefix: soapenv
+        type: object
+        properties:
+          Body:
+            xml:
+              namespace: 'http://schemas.xmlsoap.org/soap/envelope/'
+              prefix: soapenv
+            type: object
+            properties:
+              GetHolidaysForDateRangeResponse:
+                $ref: '#/definitions/GetHolidaysForDateRangeResponse_tns'
+        required:
+          - Body
+    required:
+      - Envelope
+    x-ibm-schema:
+      wsdl-port: '{http://www.holidaywebservice.com/HolidayService_v2/}HolidayService2Soap'
+      wsd-operation: GetHolidaysForDateRange
+      wsdl-message-direction-or-name: GetHolidaysForDateRangeResponse
+    example: >-
+
+      <soapenv:Envelope
+      xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+       <soapenv:Body>
+        <tns:GetHolidaysForDateRangeResponse xmlns:tns="http://www.holidaywebservice.com/HolidayService_v2/">
+         <tns:GetHolidaysForDateRangeResult>
+          <tns:Holiday><!-- between zero and unlimited repetitions of this element -->
+           <tns:Country><!-- mandatory -->string</tns:Country>
+           <tns:HolidayCode>string</tns:HolidayCode>
+           <tns:Descriptor>string</tns:Descriptor>
+           <tns:HolidayType><!-- mandatory -->string</tns:HolidayType>
+           <tns:DateType><!-- mandatory -->string</tns:DateType>
+           <tns:BankHoliday><!-- mandatory -->string</tns:BankHoliday>
+           <tns:Date><!-- mandatory -->2016-04-18T14:07:37</tns:Date>
+           <tns:RelatedHolidayCode>string</tns:RelatedHolidayCode>
+           <tns:ApplicableRegions>
+            <tns:RegionCode><!-- between zero and unlimited repetitions of this element -->
+             <tns:Code>string</tns:Code>
+             <tns:Description>string</tns:Description>
+            </tns:RegionCode>
+           </tns:ApplicableRegions>
+          </tns:Holiday>
+         </tns:GetHolidaysForDateRangeResult>
+        </tns:GetHolidaysForDateRangeResponse>
+       </soapenv:Body>
+      </soapenv:Envelope>
+  GetHolidaysForYearInput:
+    type: object
+    properties:
+      Envelope:
+        xml:
+          namespace: 'http://schemas.xmlsoap.org/soap/envelope/'
+          prefix: soapenv
+        type: object
+        properties:
+          Header:
+            $ref: '#/definitions/GetHolidaysForYearHeader'
+          Body:
+            xml:
+              namespace: 'http://schemas.xmlsoap.org/soap/envelope/'
+              prefix: soapenv
+            type: object
+            properties:
+              GetHolidaysForYear:
+                $ref: '#/definitions/GetHolidaysForYear_tns'
+            required:
+              - GetHolidaysForYear
+        required:
+          - Body
+    required:
+      - Envelope
+    x-ibm-schema:
+      wsdl-port: '{http://www.holidaywebservice.com/HolidayService_v2/}HolidayService2Soap'
+      wsd-operation: GetHolidaysForYear
+      wsdl-message-direction-or-name: GetHolidaysForYearRequest
+    example: >-
+
+      <soapenv:Envelope
+      xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+       <soapenv:Header>
+        <wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+         <wsse:UsernameToken>
+          <wsse:Username>string</wsse:Username>
+          <wsse:Password>string</wsse:Password>
+          <wsse:Nonce EncodingType="string">string</wsse:Nonce>
+          <wsu:Created>string</wsu:Created>
+         </wsse:UsernameToken>
+         <wsu:Timestamp wsu:Id="string">
+          <wsu:Created>string</wsu:Created>
+          <wsu:Expires>string</wsu:Expires>
+         </wsu:Timestamp>
+        </wsse:Security>
+       </soapenv:Header>
+       <soapenv:Body>
+        <tns:GetHolidaysForYear xmlns:tns="http://www.holidaywebservice.com/HolidayService_v2/"><!-- mandatory -->
+         <tns:countryCode><!-- mandatory -->string</tns:countryCode>
+         <tns:year><!-- mandatory -->3</tns:year>
+        </tns:GetHolidaysForYear>
+       </soapenv:Body>
+      </soapenv:Envelope>
+  GetHolidaysForYearHeader:
+    type: object
+    properties:
+      Security:
+        $ref: '#/definitions/Security'
+  GetHolidaysForYearOutput:
+    type: object
+    properties:
+      Envelope:
+        xml:
+          namespace: 'http://schemas.xmlsoap.org/soap/envelope/'
+          prefix: soapenv
+        type: object
+        properties:
+          Body:
+            xml:
+              namespace: 'http://schemas.xmlsoap.org/soap/envelope/'
+              prefix: soapenv
+            type: object
+            properties:
+              GetHolidaysForYearResponse:
+                $ref: '#/definitions/GetHolidaysForYearResponse_tns'
+        required:
+          - Body
+    required:
+      - Envelope
+    x-ibm-schema:
+      wsdl-port: '{http://www.holidaywebservice.com/HolidayService_v2/}HolidayService2Soap'
+      wsd-operation: GetHolidaysForYear
+      wsdl-message-direction-or-name: GetHolidaysForYearResponse
+    example: >-
+
+      <soapenv:Envelope
+      xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+       <soapenv:Body>
+        <tns:GetHolidaysForYearResponse xmlns:tns="http://www.holidaywebservice.com/HolidayService_v2/">
+         <tns:GetHolidaysForYearResult>
+          <tns:Holiday><!-- between zero and unlimited repetitions of this element -->
+           <tns:Country><!-- mandatory -->string</tns:Country>
+           <tns:HolidayCode>string</tns:HolidayCode>
+           <tns:Descriptor>string</tns:Descriptor>
+           <tns:HolidayType><!-- mandatory -->string</tns:HolidayType>
+           <tns:DateType><!-- mandatory -->string</tns:DateType>
+           <tns:BankHoliday><!-- mandatory -->string</tns:BankHoliday>
+           <tns:Date><!-- mandatory -->2016-04-18T14:07:37</tns:Date>
+           <tns:RelatedHolidayCode>string</tns:RelatedHolidayCode>
+           <tns:ApplicableRegions>
+            <tns:RegionCode><!-- between zero and unlimited repetitions of this element -->
+             <tns:Code>string</tns:Code>
+             <tns:Description>string</tns:Description>
+            </tns:RegionCode>
+           </tns:ApplicableRegions>
+          </tns:Holiday>
+         </tns:GetHolidaysForYearResult>
+        </tns:GetHolidaysForYearResponse>
+       </soapenv:Body>
+      </soapenv:Envelope>
+  GetHolidaysForMonthInput:
+    type: object
+    properties:
+      Envelope:
+        xml:
+          namespace: 'http://schemas.xmlsoap.org/soap/envelope/'
+          prefix: soapenv
+        type: object
+        properties:
+          Header:
+            $ref: '#/definitions/GetHolidaysForMonthHeader'
+          Body:
+            xml:
+              namespace: 'http://schemas.xmlsoap.org/soap/envelope/'
+              prefix: soapenv
+            type: object
+            properties:
+              GetHolidaysForMonth:
+                $ref: '#/definitions/GetHolidaysForMonth_tns'
+            required:
+              - GetHolidaysForMonth
+        required:
+          - Body
+    required:
+      - Envelope
+    x-ibm-schema:
+      wsdl-port: '{http://www.holidaywebservice.com/HolidayService_v2/}HolidayService2Soap'
+      wsd-operation: GetHolidaysForMonth
+      wsdl-message-direction-or-name: GetHolidaysForMonthRequest
+    example: >-
+
+      <soapenv:Envelope
+      xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+       <soapenv:Header>
+        <wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+         <wsse:UsernameToken>
+          <wsse:Username>string</wsse:Username>
+          <wsse:Password>string</wsse:Password>
+          <wsse:Nonce EncodingType="string">string</wsse:Nonce>
+          <wsu:Created>string</wsu:Created>
+         </wsse:UsernameToken>
+         <wsu:Timestamp wsu:Id="string">
+          <wsu:Created>string</wsu:Created>
+          <wsu:Expires>string</wsu:Expires>
+         </wsu:Timestamp>
+        </wsse:Security>
+       </soapenv:Header>
+       <soapenv:Body>
+        <tns:GetHolidaysForMonth xmlns:tns="http://www.holidaywebservice.com/HolidayService_v2/"><!-- mandatory -->
+         <tns:countryCode><!-- mandatory -->string</tns:countryCode>
+         <tns:year><!-- mandatory -->3</tns:year>
+         <tns:month><!-- mandatory -->3</tns:month>
+        </tns:GetHolidaysForMonth>
+       </soapenv:Body>
+      </soapenv:Envelope>
+  GetHolidaysForMonthHeader:
+    type: object
+    properties:
+      Security:
+        $ref: '#/definitions/Security'
+  GetHolidaysForMonthOutput:
+    type: object
+    properties:
+      Envelope:
+        xml:
+          namespace: 'http://schemas.xmlsoap.org/soap/envelope/'
+          prefix: soapenv
+        type: object
+        properties:
+          Body:
+            xml:
+              namespace: 'http://schemas.xmlsoap.org/soap/envelope/'
+              prefix: soapenv
+            type: object
+            properties:
+              GetHolidaysForMonthResponse:
+                $ref: '#/definitions/GetHolidaysForMonthResponse_tns'
+        required:
+          - Body
+    required:
+      - Envelope
+    x-ibm-schema:
+      wsdl-port: '{http://www.holidaywebservice.com/HolidayService_v2/}HolidayService2Soap'
+      wsd-operation: GetHolidaysForMonth
+      wsdl-message-direction-or-name: GetHolidaysForMonthResponse
+    example: >-
+
+      <soapenv:Envelope
+      xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+       <soapenv:Body>
+        <tns:GetHolidaysForMonthResponse xmlns:tns="http://www.holidaywebservice.com/HolidayService_v2/">
+         <tns:GetHolidaysForMonthResult>
+          <tns:Holiday><!-- between zero and unlimited repetitions of this element -->
+           <tns:Country><!-- mandatory -->string</tns:Country>
+           <tns:HolidayCode>string</tns:HolidayCode>
+           <tns:Descriptor>string</tns:Descriptor>
+           <tns:HolidayType><!-- mandatory -->string</tns:HolidayType>
+           <tns:DateType><!-- mandatory -->string</tns:DateType>
+           <tns:BankHoliday><!-- mandatory -->string</tns:BankHoliday>
+           <tns:Date><!-- mandatory -->2016-04-18T14:07:37</tns:Date>
+           <tns:RelatedHolidayCode>string</tns:RelatedHolidayCode>
+           <tns:ApplicableRegions>
+            <tns:RegionCode><!-- between zero and unlimited repetitions of this element -->
+             <tns:Code>string</tns:Code>
+             <tns:Description>string</tns:Description>
+            </tns:RegionCode>
+           </tns:ApplicableRegions>
+          </tns:Holiday>
+         </tns:GetHolidaysForMonthResult>
+        </tns:GetHolidaysForMonthResponse>
+       </soapenv:Body>
+      </soapenv:Envelope>
+  GetCountriesAvailable_tns:
+    xml:
+      namespace: 'http://www.holidaywebservice.com/HolidayService_v2/'
+      prefix: tns
+    type: object
+    properties: {}
+    example: >-
+
+      <tns:GetCountriesAvailable
+      xmlns:tns="http://www.holidaywebservice.com/HolidayService_v2/">
+
+      </tns:GetCountriesAvailable>
+  GetCountriesAvailableResponse_tns:
+    xml:
+      namespace: 'http://www.holidaywebservice.com/HolidayService_v2/'
+      prefix: tns
+    type: object
+    properties:
+      GetCountriesAvailableResult:
+        $ref: '#/definitions/ArrayOfCountryCode_tns'
+    example: >-
+
+      <tns:GetCountriesAvailableResponse
+      xmlns:tns="http://www.holidaywebservice.com/HolidayService_v2/">
+       <tns:GetCountriesAvailableResult>
+        <tns:CountryCode><!-- between zero and unlimited repetitions of this element -->
+         <tns:Code>string</tns:Code>
+         <tns:Description>string</tns:Description>
+        </tns:CountryCode>
+       </tns:GetCountriesAvailableResult>
+      </tns:GetCountriesAvailableResponse>
+  GetHolidaysAvailable_tns:
+    xml:
+      namespace: 'http://www.holidaywebservice.com/HolidayService_v2/'
+      prefix: tns
+    type: object
+    properties:
+      countryCode:
+        $ref: '#/definitions/Country_tns'
+    required:
+      - countryCode
+    example: >-
+
+      <tns:GetHolidaysAvailable
+      xmlns:tns="http://www.holidaywebservice.com/HolidayService_v2/">
+       <tns:countryCode><!-- mandatory -->string</tns:countryCode>
+      </tns:GetHolidaysAvailable>
+  GetHolidaysAvailableResponse_tns:
+    xml:
+      namespace: 'http://www.holidaywebservice.com/HolidayService_v2/'
+      prefix: tns
+    type: object
+    properties:
+      GetHolidaysAvailableResult:
+        $ref: '#/definitions/ArrayOfHolidayCode_tns'
+    example: >-
+
+      <tns:GetHolidaysAvailableResponse
+      xmlns:tns="http://www.holidaywebservice.com/HolidayService_v2/">
+       <tns:GetHolidaysAvailableResult>
+        <tns:HolidayCode><!-- between zero and unlimited repetitions of this element -->
+         <tns:Code>string</tns:Code>
+         <tns:Description>string</tns:Description>
+        </tns:HolidayCode>
+       </tns:GetHolidaysAvailableResult>
+      </tns:GetHolidaysAvailableResponse>
+  GetHolidayDate_tns:
+    xml:
+      namespace: 'http://www.holidaywebservice.com/HolidayService_v2/'
+      prefix: tns
+    type: object
+    properties:
+      countryCode:
+        $ref: '#/definitions/Country_tns'
+      holidayCode:
+        xml:
+          namespace: 'http://www.holidaywebservice.com/HolidayService_v2/'
+          prefix: tns
+        type: string
+      year:
+        xml:
+          namespace: 'http://www.holidaywebservice.com/HolidayService_v2/'
+          prefix: tns
+        type: integer
+        format: int32
+    required:
+      - countryCode
+      - year
+    example: >-
+
+      <tns:GetHolidayDate
+      xmlns:tns="http://www.holidaywebservice.com/HolidayService_v2/">
+       <tns:countryCode><!-- mandatory -->string</tns:countryCode>
+       <tns:holidayCode>string</tns:holidayCode>
+       <tns:year><!-- mandatory -->3</tns:year>
+      </tns:GetHolidayDate>
+  GetHolidayDateResponse_tns:
+    xml:
+      namespace: 'http://www.holidaywebservice.com/HolidayService_v2/'
+      prefix: tns
+    type: object
+    properties:
+      GetHolidayDateResult:
+        xml:
+          namespace: 'http://www.holidaywebservice.com/HolidayService_v2/'
+          prefix: tns
+        type: string
+        format: date-time
+    required:
+      - GetHolidayDateResult
+    example: >-
+
+      <tns:GetHolidayDateResponse
+      xmlns:tns="http://www.holidaywebservice.com/HolidayService_v2/">
+       <tns:GetHolidayDateResult><!-- mandatory -->2016-04-18T14:07:37</tns:GetHolidayDateResult>
+      </tns:GetHolidayDateResponse>
+  GetHolidaysForDateRange_tns:
+    xml:
+      namespace: 'http://www.holidaywebservice.com/HolidayService_v2/'
+      prefix: tns
+    type: object
+    properties:
+      countryCode:
+        $ref: '#/definitions/Country_tns'
+      startDate:
+        xml:
+          namespace: 'http://www.holidaywebservice.com/HolidayService_v2/'
+          prefix: tns
+        type: string
+        format: date-time
+      endDate:
+        xml:
+          namespace: 'http://www.holidaywebservice.com/HolidayService_v2/'
+          prefix: tns
+        type: string
+        format: date-time
+    required:
+      - countryCode
+      - startDate
+      - endDate
+    example: >-
+
+      <tns:GetHolidaysForDateRange
+      xmlns:tns="http://www.holidaywebservice.com/HolidayService_v2/">
+       <tns:countryCode><!-- mandatory -->string</tns:countryCode>
+       <tns:startDate><!-- mandatory -->2016-04-18T14:07:37</tns:startDate>
+       <tns:endDate><!-- mandatory -->2016-04-18T14:07:37</tns:endDate>
+      </tns:GetHolidaysForDateRange>
+  GetHolidaysForDateRangeResponse_tns:
+    xml:
+      namespace: 'http://www.holidaywebservice.com/HolidayService_v2/'
+      prefix: tns
+    type: object
+    properties:
+      GetHolidaysForDateRangeResult:
+        $ref: '#/definitions/ArrayOfHoliday_tns'
+    example: >-
+
+      <tns:GetHolidaysForDateRangeResponse
+      xmlns:tns="http://www.holidaywebservice.com/HolidayService_v2/">
+       <tns:GetHolidaysForDateRangeResult>
+        <tns:Holiday><!-- between zero and unlimited repetitions of this element -->
+         <tns:Country><!-- mandatory -->string</tns:Country>
+         <tns:HolidayCode>string</tns:HolidayCode>
+         <tns:Descriptor>string</tns:Descriptor>
+         <tns:HolidayType><!-- mandatory -->string</tns:HolidayType>
+         <tns:DateType><!-- mandatory -->string</tns:DateType>
+         <tns:BankHoliday><!-- mandatory -->string</tns:BankHoliday>
+         <tns:Date><!-- mandatory -->2016-04-18T14:07:37</tns:Date>
+         <tns:RelatedHolidayCode>string</tns:RelatedHolidayCode>
+         <tns:ApplicableRegions>
+          <tns:RegionCode><!-- between zero and unlimited repetitions of this element -->
+           <tns:Code>string</tns:Code>
+           <tns:Description>string</tns:Description>
+          </tns:RegionCode>
+         </tns:ApplicableRegions>
+        </tns:Holiday>
+       </tns:GetHolidaysForDateRangeResult>
+      </tns:GetHolidaysForDateRangeResponse>
+  GetHolidaysForYear_tns:
+    xml:
+      namespace: 'http://www.holidaywebservice.com/HolidayService_v2/'
+      prefix: tns
+    type: object
+    properties:
+      countryCode:
+        $ref: '#/definitions/Country_tns'
+      year:
+        xml:
+          namespace: 'http://www.holidaywebservice.com/HolidayService_v2/'
+          prefix: tns
+        type: integer
+        format: int32
+    required:
+      - countryCode
+      - year
+    example: >-
+
+      <tns:GetHolidaysForYear
+      xmlns:tns="http://www.holidaywebservice.com/HolidayService_v2/">
+       <tns:countryCode><!-- mandatory -->string</tns:countryCode>
+       <tns:year><!-- mandatory -->3</tns:year>
+      </tns:GetHolidaysForYear>
+  GetHolidaysForYearResponse_tns:
+    xml:
+      namespace: 'http://www.holidaywebservice.com/HolidayService_v2/'
+      prefix: tns
+    type: object
+    properties:
+      GetHolidaysForYearResult:
+        $ref: '#/definitions/ArrayOfHoliday_tns'
+    example: >-
+
+      <tns:GetHolidaysForYearResponse
+      xmlns:tns="http://www.holidaywebservice.com/HolidayService_v2/">
+       <tns:GetHolidaysForYearResult>
+        <tns:Holiday><!-- between zero and unlimited repetitions of this element -->
+         <tns:Country><!-- mandatory -->string</tns:Country>
+         <tns:HolidayCode>string</tns:HolidayCode>
+         <tns:Descriptor>string</tns:Descriptor>
+         <tns:HolidayType><!-- mandatory -->string</tns:HolidayType>
+         <tns:DateType><!-- mandatory -->string</tns:DateType>
+         <tns:BankHoliday><!-- mandatory -->string</tns:BankHoliday>
+         <tns:Date><!-- mandatory -->2016-04-18T14:07:37</tns:Date>
+         <tns:RelatedHolidayCode>string</tns:RelatedHolidayCode>
+         <tns:ApplicableRegions>
+          <tns:RegionCode><!-- between zero and unlimited repetitions of this element -->
+           <tns:Code>string</tns:Code>
+           <tns:Description>string</tns:Description>
+          </tns:RegionCode>
+         </tns:ApplicableRegions>
+        </tns:Holiday>
+       </tns:GetHolidaysForYearResult>
+      </tns:GetHolidaysForYearResponse>
+  GetHolidaysForMonth_tns:
+    xml:
+      namespace: 'http://www.holidaywebservice.com/HolidayService_v2/'
+      prefix: tns
+    type: object
+    properties:
+      countryCode:
+        $ref: '#/definitions/Country_tns'
+      year:
+        xml:
+          namespace: 'http://www.holidaywebservice.com/HolidayService_v2/'
+          prefix: tns
+        type: integer
+        format: int32
+      month:
+        xml:
+          namespace: 'http://www.holidaywebservice.com/HolidayService_v2/'
+          prefix: tns
+        type: integer
+        format: int32
+    required:
+      - countryCode
+      - year
+      - month
+    example: >-
+
+      <tns:GetHolidaysForMonth
+      xmlns:tns="http://www.holidaywebservice.com/HolidayService_v2/">
+       <tns:countryCode><!-- mandatory -->string</tns:countryCode>
+       <tns:year><!-- mandatory -->3</tns:year>
+       <tns:month><!-- mandatory -->3</tns:month>
+      </tns:GetHolidaysForMonth>
+  GetHolidaysForMonthResponse_tns:
+    xml:
+      namespace: 'http://www.holidaywebservice.com/HolidayService_v2/'
+      prefix: tns
+    type: object
+    properties:
+      GetHolidaysForMonthResult:
+        $ref: '#/definitions/ArrayOfHoliday_tns'
+    example: >-
+
+      <tns:GetHolidaysForMonthResponse
+      xmlns:tns="http://www.holidaywebservice.com/HolidayService_v2/">
+       <tns:GetHolidaysForMonthResult>
+        <tns:Holiday><!-- between zero and unlimited repetitions of this element -->
+         <tns:Country><!-- mandatory -->string</tns:Country>
+         <tns:HolidayCode>string</tns:HolidayCode>
+         <tns:Descriptor>string</tns:Descriptor>
+         <tns:HolidayType><!-- mandatory -->string</tns:HolidayType>
+         <tns:DateType><!-- mandatory -->string</tns:DateType>
+         <tns:BankHoliday><!-- mandatory -->string</tns:BankHoliday>
+         <tns:Date><!-- mandatory -->2016-04-18T14:07:37</tns:Date>
+         <tns:RelatedHolidayCode>string</tns:RelatedHolidayCode>
+         <tns:ApplicableRegions>
+          <tns:RegionCode><!-- between zero and unlimited repetitions of this element -->
+           <tns:Code>string</tns:Code>
+           <tns:Description>string</tns:Description>
+          </tns:RegionCode>
+         </tns:ApplicableRegions>
+        </tns:Holiday>
+       </tns:GetHolidaysForMonthResult>
+      </tns:GetHolidaysForMonthResponse>
+  ArrayOfCountryCode_tns:
+    xml:
+      namespace: 'http://www.holidaywebservice.com/HolidayService_v2/'
+      prefix: tns
+    type: object
+    properties:
+      CountryCode:
+        type: array
+        items:
+          $ref: '#/definitions/CountryCode_tns'
+        x-nullable: true
+    x-xsi-type: ArrayOfCountryCode
+    x-xsi-type-xml:
+      namespace: 'http://www.holidaywebservice.com/HolidayService_v2/'
+      prefix: tns
+    x-xsi-type-uniquename: ArrayOfCountryCode_tns
+  Country_tns:
+    xml:
+      namespace: 'http://www.holidaywebservice.com/HolidayService_v2/'
+      prefix: tns
+    type: string
+    enum:
+      - Canada
+      - GreatBritain
+      - IrelandNorthern
+      - IrelandRepublicOf
+      - Scotland
+      - UnitedStates
+    x-xsi-type: Country
+    x-xsi-type-xml:
+      namespace: 'http://www.holidaywebservice.com/HolidayService_v2/'
+      prefix: tns
+    x-xsi-type-uniquename: Country_tns
+  ArrayOfHolidayCode_tns:
+    xml:
+      namespace: 'http://www.holidaywebservice.com/HolidayService_v2/'
+      prefix: tns
+    type: object
+    properties:
+      HolidayCode:
+        type: array
+        items:
+          $ref: '#/definitions/HolidayCode_tns'
+        x-nullable: true
+    x-xsi-type: ArrayOfHolidayCode
+    x-xsi-type-xml:
+      namespace: 'http://www.holidaywebservice.com/HolidayService_v2/'
+      prefix: tns
+    x-xsi-type-uniquename: ArrayOfHolidayCode_tns
+  ArrayOfHoliday_tns:
+    xml:
+      namespace: 'http://www.holidaywebservice.com/HolidayService_v2/'
+      prefix: tns
+    type: object
+    properties:
+      Holiday:
+        type: array
+        items:
+          $ref: '#/definitions/Holiday_tns'
+        x-nullable: true
+    x-xsi-type: ArrayOfHoliday
+    x-xsi-type-xml:
+      namespace: 'http://www.holidaywebservice.com/HolidayService_v2/'
+      prefix: tns
+    x-xsi-type-uniquename: ArrayOfHoliday_tns
+  CountryCode_tns:
+    xml:
+      namespace: 'http://www.holidaywebservice.com/HolidayService_v2/'
+      prefix: tns
+    allOf:
+      - $ref: '#/definitions/CodeDescriptionBase_tns'
+      - type: object
+        properties: {}
+    x-xsi-type: CountryCode
+    x-xsi-type-xml:
+      namespace: 'http://www.holidaywebservice.com/HolidayService_v2/'
+      prefix: tns
+    x-xsi-type-uniquename: CountryCode_tns
+  HolidayCode_tns:
+    xml:
+      namespace: 'http://www.holidaywebservice.com/HolidayService_v2/'
+      prefix: tns
+    allOf:
+      - $ref: '#/definitions/CodeDescriptionBase_tns'
+      - type: object
+        properties: {}
+    x-xsi-type: HolidayCode
+    x-xsi-type-xml:
+      namespace: 'http://www.holidaywebservice.com/HolidayService_v2/'
+      prefix: tns
+    x-xsi-type-uniquename: HolidayCode_tns
+  Holiday_tns:
+    xml:
+      namespace: 'http://www.holidaywebservice.com/HolidayService_v2/'
+      prefix: tns
+    type: object
+    properties:
+      Country:
+        $ref: '#/definitions/Country_tns'
+      HolidayCode:
+        xml:
+          namespace: 'http://www.holidaywebservice.com/HolidayService_v2/'
+          prefix: tns
+        type: string
+      Descriptor:
+        xml:
+          namespace: 'http://www.holidaywebservice.com/HolidayService_v2/'
+          prefix: tns
+        type: string
+      HolidayType:
+        $ref: '#/definitions/HolidayType_tns'
+      DateType:
+        $ref: '#/definitions/HolidayDateType_tns'
+      BankHoliday:
+        $ref: '#/definitions/BankHoliday_tns'
+      Date:
+        xml:
+          namespace: 'http://www.holidaywebservice.com/HolidayService_v2/'
+          prefix: tns
+        type: string
+        format: date-time
+      RelatedHolidayCode:
+        xml:
+          namespace: 'http://www.holidaywebservice.com/HolidayService_v2/'
+          prefix: tns
+        type: string
+      ApplicableRegions:
+        $ref: '#/definitions/ArrayOfRegionCode_tns'
+    required:
+      - Country
+      - HolidayType
+      - DateType
+      - BankHoliday
+      - Date
+    x-xsi-type: Holiday
+    x-xsi-type-xml:
+      namespace: 'http://www.holidaywebservice.com/HolidayService_v2/'
+      prefix: tns
+    x-xsi-type-uniquename: Holiday_tns
+  CodeDescriptionBase_tns:
+    xml:
+      namespace: 'http://www.holidaywebservice.com/HolidayService_v2/'
+      prefix: tns
+    type: object
+    properties:
+      Code:
+        xml:
+          namespace: 'http://www.holidaywebservice.com/HolidayService_v2/'
+          prefix: tns
+        type: string
+      Description:
+        xml:
+          namespace: 'http://www.holidaywebservice.com/HolidayService_v2/'
+          prefix: tns
+        type: string
+    x-ibm-discriminator: true
+    x-xsi-type: CodeDescriptionBase
+    x-xsi-type-xml:
+      namespace: 'http://www.holidaywebservice.com/HolidayService_v2/'
+      prefix: tns
+    x-xsi-type-abstract: true
+    x-xsi-type-uniquename: CodeDescriptionBase_tns
+  HolidayType_tns:
+    xml:
+      namespace: 'http://www.holidaywebservice.com/HolidayService_v2/'
+      prefix: tns
+    type: string
+    enum:
+      - Notable
+      - Religious
+      - NotableReligious
+      - Other
+    x-xsi-type: HolidayType
+    x-xsi-type-xml:
+      namespace: 'http://www.holidaywebservice.com/HolidayService_v2/'
+      prefix: tns
+    x-xsi-type-uniquename: HolidayType_tns
+  HolidayDateType_tns:
+    xml:
+      namespace: 'http://www.holidaywebservice.com/HolidayService_v2/'
+      prefix: tns
+    type: string
+    enum:
+      - Observed
+      - Actual
+      - ObservedActual
+    x-xsi-type: HolidayDateType
+    x-xsi-type-xml:
+      namespace: 'http://www.holidaywebservice.com/HolidayService_v2/'
+      prefix: tns
+    x-xsi-type-uniquename: HolidayDateType_tns
+  BankHoliday_tns:
+    xml:
+      namespace: 'http://www.holidaywebservice.com/HolidayService_v2/'
+      prefix: tns
+    type: string
+    enum:
+      - Recognized
+      - NotRecognized
+    x-xsi-type: BankHoliday
+    x-xsi-type-xml:
+      namespace: 'http://www.holidaywebservice.com/HolidayService_v2/'
+      prefix: tns
+    x-xsi-type-uniquename: BankHoliday_tns
+  ArrayOfRegionCode_tns:
+    xml:
+      namespace: 'http://www.holidaywebservice.com/HolidayService_v2/'
+      prefix: tns
+    type: object
+    properties:
+      RegionCode:
+        type: array
+        items:
+          $ref: '#/definitions/RegionCode_tns'
+        x-nullable: true
+    x-xsi-type: ArrayOfRegionCode
+    x-xsi-type-xml:
+      namespace: 'http://www.holidaywebservice.com/HolidayService_v2/'
+      prefix: tns
+    x-xsi-type-uniquename: ArrayOfRegionCode_tns
+  RegionCode_tns:
+    xml:
+      namespace: 'http://www.holidaywebservice.com/HolidayService_v2/'
+      prefix: tns
+    allOf:
+      - $ref: '#/definitions/CodeDescriptionBase_tns'
+      - type: object
+        properties: {}
+    x-xsi-type: RegionCode
+    x-xsi-type-xml:
+      namespace: 'http://www.holidaywebservice.com/HolidayService_v2/'
+      prefix: tns
+    x-xsi-type-uniquename: RegionCode_tns

@@ -1,12 +1,15 @@
 {
-    "reporterEnabled": "mocha-junit-reporter, xunit, mochawesome, mocha-jenkins-reporter",
-    "jsonReporterOptions": {
-        "output": "report.json"
+    "reporterEnabled": "mocha-junit-reporter, xunit, mochawesome",
+    "mochawesomeReporterOptions": {
+        "reportTitle": "JOI POC",
+        "reportPageTitle": "JOI POC",
+        "reportDir": "src/tests/contract/reports/htmlReports",
+        "reportFilename": "resultEvidences"
     },
     "xunitReporterOptions": {
-        "output": "xunit.xml"
+        "output": "src/tests/contract/reports/xunitReports.xml"
     },
     "mochaJunitReporterReporterOptions": {
-        "mochaFile": "junit.xml"
+        "mochaFile": "src/tests/contract/reports/junitReports.xml"
     }
 }

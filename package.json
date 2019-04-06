@@ -5,10 +5,13 @@
   "license": "MIT",
   "scripts": {
     "start": "node src/index.js",
-    "testContract": "mocha --opts src/tests/contract/mocha.opts src/tests/contract/**/*.spec.js"
+    "testContract": "mocha --opts src/tests/contract/mocha.opts src/tests/contract/**/*.spec.js",
+    "generateSwagger": "node src/generateSwagger.js",
+    "generateSwaggerMd": "swagger-markdown -i src/tests/contract/reports/HolidayService2-swaggerDoc.yaml",
+    "test": "npm run testContract && npm run generateSwagger && npm run generateSwaggerMd"
   },
   "dependencies": {
-    "@hapi/joi": "^15.0.0",
+    "apiconnect-wsdl": "^1.6.43",
     "chai": "^4.2.0",
     "cors": "^2.8.5",
     "express": "^4.16.4",
@@ -21,6 +24,7 @@
     "mocha-multi-reporters": "^1.1.7",
     "mocha-simple-html-reporter": "^1.1.0",
     "mochawesome": "^3.1.1",
-    "supertest": "^4.0.2"
+    "supertest": "^4.0.2",
+    "swagger-markdown": "^1.1.6"
   }
 }

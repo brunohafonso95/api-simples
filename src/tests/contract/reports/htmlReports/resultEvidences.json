@@ -1,0 +1,283 @@
+{
+  "stats": {
+    "suites": 6,
+    "tests": 5,
+    "passes": 5,
+    "pending": 0,
+    "failures": 0,
+    "start": "2019-04-06T04:29:45.811Z",
+    "end": "2019-04-06T04:29:46.004Z",
+    "duration": 193,
+    "testsRegistered": 5,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false,
+    "passPercentClass": "success",
+    "pendingPercentClass": "danger"
+  },
+  "suites": {
+    "uuid": "f46400f9-c427-4523-bc49-fa687f09edf5",
+    "title": "",
+    "fullFile": "",
+    "file": "",
+    "beforeHooks": [],
+    "afterHooks": [],
+    "tests": [],
+    "suites": [
+      {
+        "uuid": "4b284c40-91d7-4910-81be-699de9d2ade4",
+        "title": "Endpoints Users",
+        "fullFile": "C:\\Users\\bhenriquea\\Desktop\\api-testes-pact\\src\\tests\\contract\\tests\\users.spec.js",
+        "file": "\\src\\tests\\contract\\tests\\users.spec.js",
+        "beforeHooks": [
+          {
+            "title": "\"before all\" hook",
+            "fullTitle": "Endpoints Users \"before all\" hook",
+            "timedOut": false,
+            "duration": 15,
+            "pass": false,
+            "fail": false,
+            "pending": false,
+            "code": "db\n    .get('users')\n    .push({\n        id: 1,\n        name: \"John Doe\",\n        age: 25,\n        genre: \"male\"\n    })\n    .write();\ndone();",
+            "err": {},
+            "isRoot": false,
+            "uuid": "fa4bad00-6844-4361-92b4-a7caab031543",
+            "isHook": true,
+            "skipped": false
+          }
+        ],
+        "afterHooks": [
+          {
+            "title": "\"after all\" hook",
+            "fullTitle": "Endpoints Users \"after all\" hook",
+            "timedOut": false,
+            "duration": 5,
+            "pass": false,
+            "fail": false,
+            "pending": false,
+            "code": "db\n    .get('users')\n    .remove({})\n    .write();\ndone();",
+            "err": {},
+            "isRoot": false,
+            "uuid": "86d1147d-22c5-4789-b7b1-fa7850388ccd",
+            "isHook": true,
+            "skipped": false
+          }
+        ],
+        "tests": [],
+        "suites": [
+          {
+            "uuid": "67da481c-e441-4656-a331-fa0ef3db7fdb",
+            "title": "Endpoint GET /api/users",
+            "fullFile": "C:\\Users\\bhenriquea\\Desktop\\api-testes-pact\\src\\tests\\contract\\tests\\users.spec.js",
+            "file": "\\src\\tests\\contract\\tests\\users.spec.js",
+            "beforeHooks": [],
+            "afterHooks": [],
+            "tests": [
+              {
+                "title": "Should return a list of Users like this:\n            [\n                {\n                    id: int,\n                    name: string,\n                    age: int,\n                    genre: string\n                }\n            ]",
+                "fullTitle": "Endpoints Users Endpoint GET /api/users Should return a list of Users like this:\n            [\n                {\n                    id: int,\n                    name: string,\n                    age: int,\n                    genre: string\n                }\n            ]",
+                "timedOut": false,
+                "duration": 72,
+                "state": "passed",
+                "speed": "fast",
+                "pass": true,
+                "fail": false,
+                "pending": false,
+                "context": "[\n  \"simple string\",\n  \"http://www.url.com/pathname\"\n]",
+                "code": "// adicionando mais detalhes no resultado do teste no report html.\n                addContext(this, 'simple string');\n                // adicionando de repente o link da task no jira ou outra ferramenta de acompanhamento report html.\n                addContext(this, 'http://www.url.com/pathname');\n                // fazendo a requisição\n                request\n                    // informando o endpoint\n                    .get('/api/users')\n                    // esse metodo serve para executar uma função quando a requisição for finalizada\n                    .end(function (err, res) {\n                        // fazendo a asserção do nosso contrato\n                        joiAssert(res.body, usersModelList);\n                        // validando o statusCode da resposta\n                        expect(res.statusCode).to.be.eql(httpStatus.OK);\n                        /*\n                        * aqui chamomos o done para informar que o teste foi finalizado e\n                        * passamos o erro como parâmetro para que o mocha registre se o teste passou ou não.\n                        */\n                        done(err);\n                    });",
+                "err": {},
+                "isRoot": false,
+                "uuid": "34cdd8ea-fee6-470b-b35a-309b08c7ac49",
+                "isHook": false,
+                "skipped": false
+              }
+            ],
+            "suites": [],
+            "passes": [
+              "34cdd8ea-fee6-470b-b35a-309b08c7ac49"
+            ],
+            "failures": [],
+            "pending": [],
+            "skipped": [],
+            "duration": 72,
+            "root": false,
+            "rootEmpty": false,
+            "_timeout": 2000
+          },
+          {
+            "uuid": "f8450a2e-de60-4654-a601-0f77ce9b67d6",
+            "title": "Endpoint GET /api/users/{id}",
+            "fullFile": "C:\\Users\\bhenriquea\\Desktop\\api-testes-pact\\src\\tests\\contract\\tests\\users.spec.js",
+            "file": "\\src\\tests\\contract\\tests\\users.spec.js",
+            "beforeHooks": [],
+            "afterHooks": [],
+            "tests": [
+              {
+                "title": "Should return a User like this:\n            {\n                id: int,\n                name: string,\n                age: int,\n                genre: string\n            }",
+                "fullTitle": "Endpoints Users Endpoint GET /api/users/{id} Should return a User like this:\n            {\n                id: int,\n                name: string,\n                age: int,\n                genre: string\n            }",
+                "timedOut": false,
+                "duration": 7,
+                "state": "passed",
+                "speed": "fast",
+                "pass": true,
+                "fail": false,
+                "pending": false,
+                "code": "request\n                    .get('/api/users/1')\n                    .end((err, res) => {\n                        joiAssert(res.body, userModel);\n                        expect(res.statusCode).to.be.eql(httpStatus.OK);\n                        done(err);\n                    });",
+                "err": {},
+                "isRoot": false,
+                "uuid": "f5da480b-b17f-4e64-bf89-89afbf0a2327",
+                "isHook": false,
+                "skipped": false
+              }
+            ],
+            "suites": [],
+            "passes": [
+              "f5da480b-b17f-4e64-bf89-89afbf0a2327"
+            ],
+            "failures": [],
+            "pending": [],
+            "skipped": [],
+            "duration": 7,
+            "root": false,
+            "rootEmpty": false,
+            "_timeout": 2000
+          },
+          {
+            "uuid": "83a49e69-7c04-46b3-b81c-57fc7c007cb3",
+            "title": "Endpoint POST /api/users",
+            "fullFile": "C:\\Users\\bhenriquea\\Desktop\\api-testes-pact\\src\\tests\\contract\\tests\\users.spec.js",
+            "file": "\\src\\tests\\contract\\tests\\users.spec.js",
+            "beforeHooks": [],
+            "afterHooks": [],
+            "tests": [
+              {
+                "title": "Should create a User and return an object liket this:\n            {\n                message: string\n            }",
+                "fullTitle": "Endpoints Users Endpoint POST /api/users Should create a User and return an object liket this:\n            {\n                message: string\n            }",
+                "timedOut": false,
+                "duration": 35,
+                "state": "passed",
+                "speed": "fast",
+                "pass": true,
+                "fail": false,
+                "pending": false,
+                "code": "const newUser = {\n                    id: 1,\n                    name: \"John Doe\",\n                    age: 25,\n                    genre: \"male\"\n                };\n                request\n                    .post('/api/users')\n                    .send(newUser)\n                    .end((err, res) => {\n                        joiAssert(res.body, returnModel);\n                        expect(res.statusCode).to.be.eql(httpStatus.OK);\n                        done(err);\n                    });",
+                "err": {},
+                "isRoot": false,
+                "uuid": "416d45aa-864b-49fc-aaf5-0847becda31e",
+                "isHook": false,
+                "skipped": false
+              }
+            ],
+            "suites": [],
+            "passes": [
+              "416d45aa-864b-49fc-aaf5-0847becda31e"
+            ],
+            "failures": [],
+            "pending": [],
+            "skipped": [],
+            "duration": 35,
+            "root": false,
+            "rootEmpty": false,
+            "_timeout": 2000
+          },
+          {
+            "uuid": "d399820c-9646-4244-991c-2e237f730606",
+            "title": "Endpoint PUT /api/users/{id}",
+            "fullFile": "C:\\Users\\bhenriquea\\Desktop\\api-testes-pact\\src\\tests\\contract\\tests\\users.spec.js",
+            "file": "\\src\\tests\\contract\\tests\\users.spec.js",
+            "beforeHooks": [],
+            "afterHooks": [],
+            "tests": [
+              {
+                "title": "Should update a User and return an object liket this:\n            {\n                message: string\n            }",
+                "fullTitle": "Endpoints Users Endpoint PUT /api/users/{id} Should update a User and return an object liket this:\n            {\n                message: string\n            }",
+                "timedOut": false,
+                "duration": 12,
+                "state": "passed",
+                "speed": "fast",
+                "pass": true,
+                "fail": false,
+                "pending": false,
+                "code": "const updatedUser = {\n                    id: 10,\n                    name: \"John Doe\",\n                    age: 25,\n                    genre: \"male\"\n                };\n                request\n                    .put('/api/users/1')\n                    .send(updatedUser)\n                    .end((err, res) => {\n                        joiAssert(res.body, returnModel);\n                        expect(res.statusCode).to.be.eql(httpStatus.OK);\n                        done(err);\n                    });",
+                "err": {},
+                "isRoot": false,
+                "uuid": "5f3e33e0-e96e-4d52-8613-e4de46e53e8d",
+                "isHook": false,
+                "skipped": false
+              }
+            ],
+            "suites": [],
+            "passes": [
+              "5f3e33e0-e96e-4d52-8613-e4de46e53e8d"
+            ],
+            "failures": [],
+            "pending": [],
+            "skipped": [],
+            "duration": 12,
+            "root": false,
+            "rootEmpty": false,
+            "_timeout": 2000
+          },
+          {
+            "uuid": "9818e217-0a42-4e3c-bc36-4fdd752d7dd5",
+            "title": "Endpoint DELETE /api/users/{id}",
+            "fullFile": "C:\\Users\\bhenriquea\\Desktop\\api-testes-pact\\src\\tests\\contract\\tests\\users.spec.js",
+            "file": "\\src\\tests\\contract\\tests\\users.spec.js",
+            "beforeHooks": [],
+            "afterHooks": [],
+            "tests": [
+              {
+                "title": "Should delete a User and return an object liket this:\n            {\n                message: string\n            }",
+                "fullTitle": "Endpoints Users Endpoint DELETE /api/users/{id} Should delete a User and return an object liket this:\n            {\n                message: string\n            }",
+                "timedOut": false,
+                "duration": 15,
+                "state": "passed",
+                "speed": "fast",
+                "pass": true,
+                "fail": false,
+                "pending": false,
+                "code": "request\n                    .delete('/api/users/1')\n                    .end((err, res) => {\n                        expect(res.statusCode).to.be.eql(httpStatus.NO_CONTENT);\n                        joiAssert(res.body, returnModel);\n                        done(err);\n                    });",
+                "err": {},
+                "isRoot": false,
+                "uuid": "9d458a08-f49a-4b50-a16f-63f5fe84dacf",
+                "isHook": false,
+                "skipped": false
+              }
+            ],
+            "suites": [],
+            "passes": [
+              "9d458a08-f49a-4b50-a16f-63f5fe84dacf"
+            ],
+            "failures": [],
+            "pending": [],
+            "skipped": [],
+            "duration": 15,
+            "root": false,
+            "rootEmpty": false,
+            "_timeout": 2000
+          }
+        ],
+        "passes": [],
+        "failures": [],
+        "pending": [],
+        "skipped": [],
+        "duration": 0,
+        "root": false,
+        "rootEmpty": false,
+        "_timeout": 2000
+      }
+    ],
+    "passes": [],
+    "failures": [],
+    "pending": [],
+    "skipped": [],
+    "duration": 0,
+    "root": true,
+    "rootEmpty": true,
+    "_timeout": 2000
+  },
+  "copyrightYear": 2019
+}

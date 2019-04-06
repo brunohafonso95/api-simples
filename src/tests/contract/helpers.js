@@ -6,12 +6,14 @@
 *
 */
 
+const addContext = require('mochawesome/addContext');
 const chai = require('chai'); // lib de assert
 const joi =  require('joi'); // lib para montar os contratos
 const joiAssert = require('joi-assert'); // lib para fazer assert nos contratos
 const supertest = require('supertest'); // lib que faz as requicições
 const app = require('../../app'); // importando o app (só é feito nesse exemplo porque eu contrui uma API para testes)
 const httpStatus = require('http-status'); // lib que tem todos os statusCodes, para não termos que decorar e ficar mais legivel no código
+const fs = require('fs');
 
 global.httpStatus = httpStatus;
 /*
@@ -23,3 +25,4 @@ global.expect = chai.expect; // extraindo apenas o classe de expect da lib de as
 global.joi = joi; 
 global.joiAssert = joiAssert;
 global.app = app;
+global.addContext = addContext;

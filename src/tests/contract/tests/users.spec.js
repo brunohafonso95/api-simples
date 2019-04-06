@@ -1,7 +1,6 @@
 /*
 * arquivo destinado para a definição dos testes referencias aos Endpoints de users
 */
-
 const db = require('../../../config/database')(); // importando e instancioando o modulo de banco de dados
 /*
 * extraindo os models do objeto exportado em usersModel
@@ -13,7 +12,7 @@ const { usersModelList, userModel, returnModel } = require('../models/usersModel
 * o describe serve apenas para a definição de uma descrição para o teste,
 * a função recebe 2 parâmetros, o primeiro é a string com a descrição e o segundo parâmetro é uma função.
 */
-describe('Endpoints Users', () => {
+describe('Endpoints Users', function () {
     /*
     * hook before, neste exemplo estamos adicinando um registro a base de dados no inicio dos testes 
     */
@@ -42,7 +41,7 @@ describe('Endpoints Users', () => {
     });
 
 
-    describe('Endpoint GET /api/users', () => {
+    describe('Endpoint GET /api/users', function () {
         /*
         * a função it define o nosso teste em si, a função recebe uma string de descrição como primeiro
         * parâmetro e uma funcão como segundo parâmetro,
@@ -58,7 +57,14 @@ describe('Endpoints Users', () => {
                     age: int,
                     genre: string
                 }
-            ]`, (done) => {
+            ]`, function (done) {
+
+                // adicionando mais detalhes no resultado do teste no report html.
+                addContext(this, 'simple string');
+
+                // adicionando de repente o link da task no jira ou outra ferramenta de acompanhamento report html.
+                addContext(this, 'http://www.url.com/pathname');
+
 
                 // fazendo a requisição
                 request
