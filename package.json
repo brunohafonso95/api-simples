@@ -11,7 +11,7 @@
     "test": "npm run testContract && npm run generateSwagger && npm run generateSwaggerMd"
   },
   "dependencies": {
-    "apiconnect-wsdl": "^1.6.43",
+    "apiconnect-wsdl": "^1.8.7",
     "chai": "^4.2.0",
     "cors": "^2.8.5",
     "express": "^4.16.4",
