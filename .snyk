@@ -1,0 +1,18 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.14.1
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  SNYK-JS-LODASH-567746:
+    - apiconnect-wsdl > lodash:
+        patched: '2020-04-30T23:02:13.531Z'
+    - lowdb > lodash:
+        patched: '2020-04-30T23:02:13.531Z'
+    - mocha-multi-reporters > lodash:
+        patched: '2020-04-30T23:02:13.531Z'
+    - mochawesome > lodash:
+        patched: '2020-04-30T23:02:13.531Z'
+    - apiconnect-wsdl > soap > lodash:
+        patched: '2020-04-30T23:02:13.531Z'
+    - mocha > yargs-unparser > lodash:
+        patched: '2020-04-30T23:02:13.531Z'
